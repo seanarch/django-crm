@@ -4,7 +4,17 @@
   <h1>Register</h1>
   <br />
   <form method="POST" action="">
-    {% csrf_token %} {{form.as_p}}
+    {% csrf_token %} {% if form.erros %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      Your Form Has Errors {% for field in form %} {% if field.errors %}
+      {{field.errors}} {% endif%} {% endfor %}
+      <button
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endif %} {{form.as_p}}
 
     <br />
 
